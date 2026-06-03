@@ -32,63 +32,57 @@ h1 { font-size: 24px; margin: 0 0 4px; }
 
 .day { display: none; }
 .day.active { display: block; }
-
-/* two-column layout: meetings vs networking */
-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
-.colhead { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 4px 0 8px; border-bottom: 2px solid #e4e7eb; margin-bottom: 12px; }
-.col-meet .colhead { color: #1c2024; }
-.col-net .colhead { color: #8a9099; }
-@media (max-width: 720px){ .cols { grid-template-columns: 1fr; } .col-net { margin-top: 10px; } }
-
-.time { font-size: 12px; font-weight: 700; color: #6b727a; letter-spacing: .03em; margin: 14px 0 6px; text-transform: uppercase; }
-.time:first-of-type { margin-top: 0; }
-
-.card { background:#fff; border:1px solid #e4e7eb; border-left-width: 4px; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; display:flex; gap: 12px; align-items: flex-start; }
-.card.cbd{border-left-color:#2f6fed}.card.marina{border-left-color:#8b5cf6}.card.bugis{border-left-color:#f59e0b}.card.kallang{border-left-color:#16a34a}.card.west{border-left-color:#e11d48}
-.card .body { flex: 1; }
-.card .top { display:flex; align-items:center; gap:8px; flex-wrap: wrap; }
-.card .name { font-weight: 700; font-size: 15.5px; }
-.card .addr { font-size: 13px; color:#5b636b; margin-top: 3px; }
-.card .note { font-size: 12.5px; color:#7a818a; margin-top: 4px; font-style: italic; }
-.badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing:.02em; }
-.b-closing{background:#fde68a;color:#92400e}.b-new{background:#bbf7d0;color:#166534}.b-nurture{background:#e0e7ff;color:#3730a3}.b-existing{background:#fbcfe8;color:#9d174d}.b-vc{background:#f1f5f9;color:#475569}
-.val { font-size: 12.5px; font-weight: 700; color:#1c2024; }
-.chk { margin-top: 2px; }
-.chk input { width: 18px; height: 18px; cursor: pointer; }
-.card.done { opacity: .5; }
-.card.done .name { text-decoration: line-through; }
-
-/* networking event cards */
-.netcard { background:#fafbfc; border:1px solid #e7e9ec; border-left:4px solid #cbd1d8; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
-.netcard .nt { font-size:11.5px; font-weight:700; color:#7a818a; letter-spacing:.03em; }
-.netcard .nn { font-weight:600; font-size:14px; color:#3a4148; margin-top:2px; }
-.netcard .nh { font-size:12px; color:#9aa0a8; margin-top:3px; }
-.netcard.reg { border-left-color:#16a34a; }
-.netcard.reg .pill { background:#dcfce7; color:#166534; }
-.netcard.conflict { border-left-color:#f59e0b; background:#fffaf0; }
-.netcard.conflict .pill { background:#fde68a; color:#92400e; }
-.pill { display:inline-block; font-size:10.5px; font-weight:700; padding:1px 7px; border-radius:999px; background:#eef0f3; color:#6b727a; margin-left:6px; vertical-align:middle; text-transform:uppercase; letter-spacing:.02em;}
-.col-net .empty { font-size:12.5px; color:#aab0b8; font-style:italic; padding:8px 2px; }
-
 .flex-note { background:#fff8e1; border:1px solid #fde68a; border-radius:10px; padding:10px 14px; font-size:13px; color:#7a5b08; margin: 0 0 14px; }
+
+/* ---- time-scaled calendar ---- */
+.tl { position: relative; margin-top: 34px; }
+.tl .hr { position:absolute; left:48px; right:0; border-top:1px solid #ebedf0; }
+.tl .hrlabel { position:absolute; left:0; width:42px; text-align:right; font-size:10.5px; color:#aab0b8; transform: translateY(-6px); }
+.lanehead { position:absolute; top:-24px; font-weight:700; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; }
+.lh-meet { left:54px; color:#1c2024; }
+.lh-net  { left:50%;  color:#9aa0a8; }
+.lane { position:absolute; top:0; }
+.lane-meet { left:54px; width:calc(50% - 58px); }
+.lane-net  { left:50%;  width:calc(50% - 6px); }
+
+.ev { position:absolute; border:1px solid #e4e7eb; border-left-width:4px; border-radius:8px; background:#fff; padding:4px 8px; overflow:hidden; }
+.ev .evtime { font-size:10px; color:#9aa0a8; line-height:1.2; }
+.ev .evt { font-weight:700; font-size:12.5px; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ev .evm { font-size:11px; color:#6b727a; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ev.cbd{border-left-color:#2f6fed}.ev.marina{border-left-color:#8b5cf6}.ev.bugis{border-left-color:#f59e0b}.ev.kallang{border-left-color:#16a34a}.ev.west{border-left-color:#e11d48}
+.ev.net{background:#fafbfc;border-left-color:#cbd1d8;}
+.ev.reg{border-left-color:#16a34a;}
+.ev.conflict{border-left-color:#f59e0b;background:#fff7ea;}
+.ev.clk{cursor:pointer;}
+.ev.clk:hover{box-shadow:0 0 0 2px rgba(47,111,237,.25);}
+.ev.done{opacity:.42;}
+.ev.done .evt{text-decoration:line-through;}
+.tlcaption{font-size:12px;color:#8a9099;margin:2px 0 0;}
+
 .clusterbox { background:#fff; border:1px solid #e4e7eb; border-radius:12px; padding: 14px 16px; margin-top: 8px; }
 .clusterbox h3 { margin:0 0 10px; font-size:15px; }
 .cl { margin-bottom: 12px; }
 .cl .h { font-weight:700; font-size:13.5px; display:flex; align-items:center; gap:7px; }
 .cl .items { font-size:13px; color:#5b636b; margin: 2px 0 0 17px; }
 .foot { font-size:12px; color:#9aa0a8; margin-top: 22px; text-align:center; }
+
+@media (max-width: 640px){
+  .lane-meet { left:48px; width:calc(50% - 50px); }
+  .lane-net  { left:50%;  width:calc(50% - 4px); }
+  .ev .evm{ display:none; }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Singapore Sales Trip — Routed by Proximity</h1>
-  <p class="sub">9–11 June 2026 · 1:1 meetings on the left, SuperAI / SG AI Week networking on the right — pick per time slot. ✓ check off meetings as they confirm (saves automatically).</p>
+  <p class="sub">9–11 June 2026 · time-scaled day view — 1:1 meetings (left) and SuperAI / SG AI Week networking (right) on a shared clock, so any clash shows up side by side. Tap a meeting to mark it confirmed (saves automatically).</p>
 
   <div class="logi">
     <div class="row">
       <div><b>✈ Arrive</b> — Tue 9 Jun, 8:00am · Seletar Airport (NE). City ~30–40 min by taxi → realistic first meeting ~9:30–10:00am.</div>
       <div><b>✈ Depart</b> — Thu 11 Jun, 7:00pm · Seletar Airport. Leave the city by <b>~5:00pm</b> (earlier if ending in the west).</div>
-      <div><b>⏱ Window</b> — Meetings 8am–8pm, 60 min each + travel. <b>1:1s take precedence</b> over networking.</div>
+      <div><b>⏱ Window</b> — Meetings 8am–8pm, shown as 60-min blocks. <b>1:1s take precedence</b> over networking.</div>
     </div>
   </div>
 
@@ -103,13 +97,6 @@ h1 { font-size: 24px; margin: 0 0 4px; }
     <span class="chip"><span class="dot c-kallang"></span> Kallang</span>
     <span class="chip"><span class="dot c-west"></span> West / one-north</span>
   </div>
-  <div class="legend">
-    <span class="chip"><span class="badge b-closing">closing</span></span>
-    <span class="chip"><span class="badge b-new">new</span></span>
-    <span class="chip"><span class="badge b-nurture">nurture</span></span>
-    <span class="chip"><span class="badge b-existing">existing</span></span>
-    <span class="chip"><span class="badge b-vc">VC</span></span>
-  </div>
 
   <div class="tabs">
     <div class="tab active" data-day="d1">Tue 9 Jun<small>Arrival · Marina + East</small></div>
@@ -118,226 +105,34 @@ h1 { font-size: 24px; margin: 0 0 4px; }
     <div class="tab" data-day="map">Clusters<small>Proximity map</small></div>
   </div>
 
-  <!-- DAY 1 -->
   <div class="day active" id="d1">
-    <div class="cols">
-      <!-- meetings -->
-      <div class="col-meet">
-        <div class="colhead">① 1:1 Meetings</div>
-
-        <div class="time">~9:30 · from Seletar, hit Kallang on the way in</div>
-        <div class="card kallang" data-id="accredify">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Accredify</span><span class="badge b-new">new</span><span class="val">$10k</span></div>
-            <div class="addr">30A Kallang Place, #11-06 · S339213</div>
-            <div class="note">Intro via Kenneth @ BeLive · roughly on the route in from Seletar</div></div>
-        </div>
-
-        <div class="time">~11:30 · Bugis / Bras Basah</div>
-        <div class="card bugis" data-id="locad">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Locad</span><span class="badge b-nurture">nurture</span><span class="val">$20k</span></div>
-            <div class="addr">128 Prinsep Street, #01-01 Sin Thai Hin Bldg · S188655</div></div>
-        </div>
-
-        <div class="time">Afternoon · Marina Centre (~5-min walk apart)</div>
-        <div class="card marina" data-id="omnihr">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Omni HR</span><span class="badge b-closing">closing</span><span class="val">$17k</span></div>
-            <div class="addr">6 Raffles Boulevard, Marina Square #03-308 · S039594</div>
-            <div class="note">Top priority — deal is closing. Lock first; don't leave it at risk.</div></div>
-        </div>
-        <div class="card marina" data-id="pomelo">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Pomelo Pay</span><span class="badge b-new">new</span><span class="val">$22k</span></div>
-            <div class="addr">3 Temasek Ave, #18-01 Centennial Tower · S039190</div></div>
-        </div>
-      </div>
-
-      <!-- networking -->
-      <div class="col-net">
-        <div class="colhead">② Networking — SuperAI / SG AI Week</div>
-
-        <div class="netcard reg">
-          <div class="nt">8:30–11:00am <span class="pill">registered</span></div>
-          <div class="nn">Notion Sessions</div>
-          <div class="nh">Tight given the 8am Seletar landing — likely catch the tail end only.</div>
-        </div>
-        <div class="netcard">
-          <div class="nt">AM</div>
-          <div class="nn">Catch up: Farquhar / Jason</div>
-          <div class="nh">Informal — flex around the morning meetings.</div>
-        </div>
-        <div class="netcard">
-          <div class="nt">1:30–4:30pm</div>
-          <div class="nn">SparkLabs Global Demo Day</div>
-          <div class="nh">Overlaps the Marina afternoon block — your 1:1s win, drop in if a slot opens.</div>
-        </div>
-        <div class="netcard">
-          <div class="nt">5:00–7:00pm</div>
-          <div class="nn">AppWorks Demo Day</div>
-          <div class="nh">Good evening landing spot after the Marina meetings wrap.</div>
-        </div>
-      </div>
-    </div>
+    <p class="tlcaption">Box height = real duration. A meeting and an event stacked at the same height = a slot you must choose between.</p>
+    <div class="tl" id="tl-d1"></div>
   </div>
 
-  <!-- DAY 2 -->
   <div class="day" id="d2">
-    <div class="flex-note">6 CBD targets within a ~10-min walk, plus one Marina hop for <b>Adaptive Capital (confirmed 11am Suntec)</b>. HugoHub pulled to 9am per their "before 11am" ask. Drop any that don't confirm; the CBD ones still chain on foot.</div>
-    <div class="cols">
-      <!-- meetings -->
-      <div class="col-meet">
-        <div class="colhead">① 1:1 Meetings</div>
-
-        <div class="time">9:00 · CBD</div>
-        <div class="card cbd" data-id="hugohub">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">HugoHub</span><span class="badge b-nurture">nurture</span><span class="val">$39k</span></div>
-            <div class="addr">143 Cecil Street, #07-01 GB Building · S069542 · (Atlas Consolidated)</div>
-            <div class="note">They asked for before 11am — taking the first slot of the day</div></div>
-        </div>
-        <div class="time">10:00 · CBD</div>
-        <div class="card cbd" data-id="atome">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Atome</span><span class="badge b-new">new</span><span class="val">&gt;$50k</span></div>
-            <div class="addr">80 Robinson Road, #09-01 · S068898</div></div>
-        </div>
-
-        <div class="time">11:00 · Marina hop (~12 min from CBD)</div>
-        <div class="card marina" data-id="adaptive">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Adaptive Capital Partners</span><span class="badge b-vc">VC</span><span class="val">confirmed</span></div>
-            <div class="addr">Suntec City · 11:00am (their offer)</div>
-            <div class="note">Alt offered: 10:15am at Marina Bay Sands. Taking 11am Suntec to keep the CBD morning intact.</div></div>
-        </div>
-
-        <div class="time">1:30 · back in CBD after lunch</div>
-        <div class="card cbd" data-id="osome">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Osome</span><span class="badge b-new">new</span><span class="val">$42k</span></div>
-            <div class="addr">68 Circular Road, #02-01 · S049422 · (Boat Quay)</div></div>
-        </div>
-        <div class="time">2:45</div>
-        <div class="card cbd" data-id="toku">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Toku</span><span class="badge b-new">new</span><span class="val">$20k</span></div>
-            <div class="addr">61 Robinson Road, #08-02 · S068893</div></div>
-        </div>
-        <div class="time">4:00</div>
-        <div class="card cbd" data-id="syfe">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Syfe</span><span class="badge b-nurture">nurture</span><span class="val">&gt;$50k</span></div>
-            <div class="addr">4 Robinson Road, #11-01 The House of Eden · S048543</div></div>
-        </div>
-        <div class="time">5:15</div>
-        <div class="card cbd" data-id="paywho">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Paywho</span><span class="badge b-existing">existing</span><span class="val">$5.4k</span></div>
-            <div class="addr">138 Robinson Road, #22-01 Oxley Tower · S068906</div>
-            <div class="note">Has a referral for GCS — worth the touch even if late in the day</div></div>
-        </div>
-      </div>
-
-      <!-- networking -->
-      <div class="col-net">
-        <div class="colhead">② Networking — SuperAI / SG AI Week</div>
-
-        <div class="netcard">
-          <div class="nt">8:00–10:30am</div>
-          <div class="nn">Super Social AI Networking Mixer</div>
-          <div class="nh">Antler, GGV · clashes with HugoHub + Atome — skip unless those slip.</div>
-        </div>
-        <div class="netcard conflict">
-          <div class="nt">11:00–12:30pm <span class="pill">conflict</span></div>
-          <div class="nn">Shaping the Future of AI</div>
-          <div class="nh">HSBC, founders + investors. <b>Same time as Adaptive Capital</b> — the confirmed 1:1 wins. Take this only if you switch Adaptive to the 10:15 MBS slot.</div>
-        </div>
-        <div class="netcard">
-          <div class="nt">Evening</div>
-          <div class="nn">SparkLabs dinner</div>
-          <div class="nh">After Paywho (5:15). Good if it's a warm intro dinner.</div>
-        </div>
-        <div class="netcard">
-          <div class="nt">6:00–9:30pm</div>
-          <div class="nn">AI Founders × APAC: model to market</div>
-          <div class="nh">TiDB, GraniteAsia, EDB.</div>
-        </div>
-        <div class="netcard">
-          <div class="nt">7:00–10:00pm</div>
-          <div class="nn">SuperAI Fintech × AI Mixer</div>
-          <div class="nh">HSBC, OpenAI, Waffo · most on-target for your fintech pipeline. Pick one evening event.</div>
-        </div>
-      </div>
-    </div>
+    <div class="flex-note">6 CBD targets within a ~10-min walk, plus one Marina hop for <b>Adaptive Capital (confirmed 11am Suntec)</b> — note it sits right on top of the HSBC "Shaping the Future of AI" session. HugoHub pulled to 9am per their "before 11am" ask.</div>
+    <div class="tl" id="tl-d2"></div>
   </div>
 
-  <!-- DAY 3 -->
   <div class="day" id="d3">
     <div class="flex-note">West cluster, then a long transfer to Seletar (NE). Wrap by ~4:00 and leave by <b>~4:30–4:45pm</b> for the 7:00pm flight — one-north → Seletar is ~40–50 min.</div>
-    <div class="cols">
-      <!-- meetings -->
-      <div class="col-meet">
-        <div class="colhead">① 1:1 Meetings</div>
-
-        <div class="time">9:00 · one-north (BLOCK71)</div>
-        <div class="card west" data-id="fluid">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">Fluid</span><span class="badge b-existing">existing</span><span class="val">$10.4k</span></div>
-            <div class="addr">81 Ayer Rajah Crescent, #03-65 (BLOCK71) · S139967</div>
-            <div class="note">Ask for the referral to HeyMax</div></div>
-        </div>
-        <div class="time">10:45 · Pasir Panjang (~10 min from one-north)</div>
-        <div class="card west" data-id="shopline">
-          <div class="chk"><input type="checkbox"></div>
-          <div class="body"><div class="top"><span class="name">SHOPLINE</span><span class="badge b-nurture">nurture</span><span class="val">&gt;$50k</span></div>
-            <div class="addr">30 Pasir Panjang Road, Mapletree Business City #15-31A · S117440</div></div>
-        </div>
-
-        <div class="time">Afternoon · FLEX — overflow & re-confirmations</div>
-        <div class="card" style="border-left-color:#cbd1d8" data-id="flex">
-          <div class="body"><div class="top"><span class="name">Open buffer</span></div>
-            <div class="addr">Use for any Day 1–2 meeting that got bumped, or a late confirmation. CBD target → head back to town early; west target → keep it here and guard the airport buffer.</div></div>
-        </div>
-      </div>
-
-      <!-- networking -->
-      <div class="col-net">
-        <div class="colhead">② Networking — SuperAI / SG AI Week</div>
-
-        <div class="netcard">
-          <div class="nt">6:45–8:00am</div>
-          <div class="nn">AI in Motion 10k run</div>
-          <div class="nh">Optional early start before the 9am one-north meeting.</div>
-        </div>
-        <div class="empty">Light networking day — focus is the two west meetings, then the airport run. Keep the afternoon clear for buffer and travel.</div>
-      </div>
-    </div>
+    <div class="tl" id="tl-d3"></div>
   </div>
 
-  <!-- CLUSTER MAP -->
   <div class="day" id="map">
     <div class="clusterbox">
       <h3>Proximity clusters — who's walkable together</h3>
-
       <div class="cl"><div class="h"><span class="dot c-cbd"></span> CBD core — Robinson / Cecil / Circular (all ≤10-min walk)</div>
         <div class="items">Atome (80 Robinson) · Toku (61 Robinson) · Syfe (4 Robinson) · Paywho (138 Robinson) · HugoHub (143 Cecil) · Osome (68 Circular). <b>→ Day 2</b> (HugoHub pulled to 9am per their before-11 ask).</div></div>
-
       <div class="cl"><div class="h"><span class="dot c-marina"></span> Marina Centre / Suntec (~5–12-min apart)</div>
         <div class="items">Omni HR (Marina Square) · Pomelo Pay (Centennial Tower) <b>→ Day 1 PM</b>. Adaptive Capital (Suntec City, confirmed 11am) <b>→ Day 2</b> as a mid-morning hop out of the CBD. All next to the SuperAI / Marina Bay networking venues.</div></div>
-
       <div class="cl"><div class="h"><span class="dot c-bugis"></span> Bras Basah / Bugis</div>
         <div class="items">Locad (128 Prinsep St). <b>→ Day 1</b> — sits between Kallang and Marina.</div></div>
-
       <div class="cl"><div class="h"><span class="dot c-kallang"></span> Kallang</div>
         <div class="items">Accredify (30A Kallang Place). <b>→ Day 1 AM</b> — on the way in from Seletar.</div></div>
-
       <div class="cl"><div class="h"><span class="dot c-west"></span> West — one-north / Pasir Panjang (~10 min apart)</div>
         <div class="items">Fluid (BLOCK71, Ayer Rajah) · SHOPLINE (Mapletree Business City). <b>→ Day 3</b> — kept together, far from everything else.</div></div>
-
-      <p style="font-size:12.5px;color:#7a818a;margin:14px 0 0">
-        Logic: the dense CBD block gets its own day (Day 2) so confirmations there chain on foot. Day 1 sweeps the arrival corridor (Kallang → Bugis → Marina), anchoring the closing deal (Omni HR) early. Day 3 isolates the two western targets before the cross-island run to Seletar. Swap freely <i>within</i> a colour; avoid mixing colours in one block.
-      </p>
     </div>
   </div>
 
@@ -346,6 +141,7 @@ h1 { font-size: 24px; margin: 0 0 4px; }
 
 <script>
 (function(){
+  // ---- tab switching ----
   var tabs = document.querySelectorAll('.tab');
   var days = document.querySelectorAll('.day');
   tabs.forEach(function(t){
@@ -357,15 +153,110 @@ h1 { font-size: 24px; margin: 0 0 4px; }
     });
   });
 
-  var KEY = 'sg_trip_confirmed_v1';
-  var state = {};
-  try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){}
-  document.querySelectorAll('.card[data-id]').forEach(function(card){
-    var id = card.dataset.id;
-    var box = card.querySelector('input[type=checkbox]');
-    if(!box) return;
-    if(state[id]){ box.checked = true; card.classList.add('done'); }
-    box.addEventListener('change', function(){
-      card.classList.toggle('done', box.checked);
-      state[id] = box.checked;
-      try { localStorage.setItem(KEY, JSON.stringify(state)); } c
+  // ---- confirmed-meeting persistence ----
+  var KEY='sg_trip_confirmed_v1';
+  function getState(){ try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};} }
+  function setState(s){ try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){} }
+
+  // ---- timeline geometry ----
+  var PX=0.85, T0=360, T1=1320, H=(T1-T0)*PX;   // 6:00am to 10:00pm
+  function fmt(m){ var h=Math.floor(m/60), mm=m%60, ap=h<12?'AM':'PM', hh=h%12; if(hh===0)hh=12; return hh+(mm?(':' + (mm<10?'0':'') + mm):'')+' '+ap; }
+
+  function pack(evs){
+    evs=evs.slice().sort(function(a,b){return a.s-b.s||a.e-b.e;});
+    var cols=[];
+    evs.forEach(function(ev){ var placed=false;
+      for(var i=0;i<cols.length;i++){ if(cols[i]<=ev.s){ ev._c=i; cols[i]=ev.e; placed=true; break; } }
+      if(!placed){ ev._c=cols.length; cols.push(ev.e); } });
+    var group=[], maxEnd=-1;
+    function flush(g){ var n=0; g.forEach(function(e){ if(e._c+1>n)n=e._c+1; }); g.forEach(function(e){ e._n=n; }); }
+    evs.forEach(function(ev){
+      if(group.length===0){ group=[ev]; maxEnd=ev.e; }
+      else if(ev.s<maxEnd){ group.push(ev); if(ev.e>maxEnd)maxEnd=ev.e; }
+      else { flush(group); group=[ev]; maxEnd=ev.e; } });
+    if(group.length) flush(group);
+    return evs;
+  }
+
+  function addEvents(lane,evs,kind){
+    var state=getState();
+    evs.forEach(function(ev){
+      var top=(ev.s-T0)*PX, h=Math.max((ev.e-ev.s)*PX,28), n=ev._n||1, c=ev._c||0;
+      var d=document.createElement('div');
+      d.className='ev '+(kind==='net'?'net ':'')+(ev.c||'');
+      d.style.top=top+'px'; d.style.height=(h-3)+'px';
+      d.style.left='calc('+(c/n*100)+'% + '+(c?2:0)+'px)';
+      d.style.width='calc('+(100/n)+'% - '+(n>1?5:3)+'px)';
+      var html='<div class="evtime">'+fmt(ev.s)+'–'+fmt(ev.e)+'</div><div class="evt">'+ev.t+'</div>';
+      if(h>42 && ev.m) html+='<div class="evm">'+ev.m+'</div>';
+      d.innerHTML=html;
+      if(kind==='meet' && ev.id){
+        d.classList.add('clk');
+        if(state[ev.id]) d.classList.add('done');
+        d.addEventListener('click',function(){ var s=getState(); s[ev.id]=!s[ev.id]; setState(s); d.classList.toggle('done',!!s[ev.id]); });
+      }
+      lane.appendChild(d);
+    });
+  }
+
+  function render(id,meet,net){
+    var tl=document.getElementById(id); tl.style.height=H+'px';
+    for(var hm=Math.ceil(T0/60)*60; hm<=T1; hm+=60){
+      var top=(hm-T0)*PX;
+      var line=document.createElement('div'); line.className='hr'; line.style.top=top+'px'; tl.appendChild(line);
+      var lab=document.createElement('div'); lab.className='hrlabel'; lab.style.top=top+'px'; lab.textContent=fmt(hm); tl.appendChild(lab);
+    }
+    var hM=document.createElement('div'); hM.className='lanehead lh-meet'; hM.textContent='1:1 Meetings'; tl.appendChild(hM);
+    var hN=document.createElement('div'); hN.className='lanehead lh-net'; hN.textContent='Networking'; tl.appendChild(hN);
+    var lm=document.createElement('div'); lm.className='lane lane-meet'; lm.style.height=H+'px'; tl.appendChild(lm);
+    var ln=document.createElement('div'); ln.className='lane lane-net';  ln.style.height=H+'px'; tl.appendChild(ln);
+    addEvents(lm,pack(meet),'meet');
+    addEvents(ln,pack(net),'net');
+  }
+
+  // ---- data (times in minutes from midnight) ----
+  var D1_MEET=[
+    {s:570,e:630,t:'Accredify',  m:'Kallang · new · $10k',  c:'kallang',id:'accredify'},
+    {s:690,e:750,t:'Locad',      m:'Bugis · nurture · $20k',c:'bugis',  id:'locad'},
+    {s:840,e:900,t:'Omni HR',    m:'Marina · CLOSING · $17k',c:'marina', id:'omnihr'},
+    {s:915,e:975,t:'Pomelo Pay', m:'Marina · new · $22k',   c:'marina', id:'pomelo'}
+  ];
+  var D1_NET=[
+    {s:510,e:660, t:'Notion Sessions', m:'registered', c:'reg'},
+    {s:480,e:540, t:'Catch up: Farquhar / Jason', m:'AM · informal', c:''},
+    {s:810,e:990, t:'SparkLabs Global Demo Day', m:'overlaps Marina block', c:''},
+    {s:1020,e:1140,t:'AppWorks Demo Day', m:'after meetings wrap', c:''}
+  ];
+  var D2_MEET=[
+    {s:540,e:600, t:'HugoHub', m:'CBD · nurture · $39k · before 11am', c:'cbd',   id:'hugohub'},
+    {s:600,e:660, t:'Atome',   m:'CBD · new · >$50k',                  c:'cbd',   id:'atome'},
+    {s:660,e:720, t:'Adaptive Capital', m:'Suntec · VC · confirmed 11am', c:'marina', id:'adaptive'},
+    {s:810,e:870, t:'Osome',   m:'CBD · new · $42k', c:'cbd', id:'osome'},
+    {s:885,e:945, t:'Toku',    m:'CBD · new · $20k', c:'cbd', id:'toku'},
+    {s:960,e:1020,t:'Syfe',    m:'CBD · nurture · >$50k', c:'cbd', id:'syfe'},
+    {s:1035,e:1095,t:'Paywho', m:'CBD · existing · $5.4k', c:'cbd', id:'paywho'}
+  ];
+  var D2_NET=[
+    {s:480,e:630, t:'Super Social AI Mixer', m:'Antler, GGV', c:''},
+    {s:660,e:750, t:'Shaping the Future of AI', m:'HSBC · clashes w/ Adaptive', c:'conflict'},
+    {s:1080,e:1290,t:'AI Founders × APAC', m:'TiDB, GraniteAsia, EDB', c:''},
+    {s:1140,e:1320,t:'Fintech × AI Mixer', m:'HSBC, OpenAI, Waffo', c:''},
+    {s:1140,e:1260,t:'SparkLabs dinner', m:'evening', c:''}
+  ];
+  var D3_MEET=[
+    {s:540,e:600, t:'Fluid',    m:'one-north · existing · $10.4k', c:'west', id:'fluid'},
+    {s:645,e:705, t:'SHOPLINE', m:'Pasir Panjang · nurture · >$50k', c:'west', id:'shopline'},
+    {s:780,e:960, t:'FLEX buffer', m:'overflow / re-confirms · leave by ~4:45pm', c:''}
+  ];
+  var D3_NET=[
+    {s:405,e:480, t:'AI in Motion 10k run', m:'optional early start', c:''}
+  ];
+
+  render('tl-d1',D1_MEET,D1_NET);
+  render('tl-d2',D2_MEET,D2_NET);
+  render('tl-d3',D3_MEET,D3_NET);
+})();
+</script>
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
